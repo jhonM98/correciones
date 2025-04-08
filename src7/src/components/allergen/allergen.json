@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_allergen_allergens",
+  "info": {
+    "displayName": "Allergen",
+    "icon": "emotionUnhappy",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Description": {
+      "type": "text",
+      "required": true
+    },
+    "Icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    }
+  }
+}
