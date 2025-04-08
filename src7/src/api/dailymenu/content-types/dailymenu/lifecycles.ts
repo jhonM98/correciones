@@ -9,16 +9,19 @@ module.exports = {
   async afterUpdate(event) {
     const { result } = event;
     
-    // Sugerencias: evitar procedimientos innecesarios si ya se ha actualizado el precio calculado.
+    // Sugerencias: evitar reclacular si ya fue actualizado
     if (event.state?.isCalculatedUpdate) return;
 
 
-    // Sugerencias: si el menu esta publicado, no realizamos ninguna accion repetitiva.
-    if (event.params.data && event.params.data.publishedAt) {
+    // Sugerencias: optimizar la verificacion para evitar consultas innecesarias. mejorar la logica de control de "publisheAt",
+    // mejorar la logica de control de "publisheAt", puede comprobarse antes de hacer la consulta.
+     if (event.params.data && event.params.data.publishedAt) {
       return;
     }
 
+    
     // Sugerencias: realizamos consultas optimizadas para evitar repeticiones de codigo, al obtener los datos del menu.
+    // Sugerencia: Agregar un log cuando falten platos para facilitar el seguimiento del error
     const daily = await strapi.documents(API_DAILY).findOne({
       documentId: result.documentId,
       populate: {
